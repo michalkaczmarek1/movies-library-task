@@ -13,7 +13,7 @@ class Movie():
         return self.amount_plays + 1
 
     def __str__(self):
-        return f"{self.title} ({self.year}) {self.amount_plays}"
+        return f"{self.title} ({self.year})"
 
 
 class Serie(Movie):
@@ -23,7 +23,7 @@ class Serie(Movie):
         self.season_number = season_number
 
     def __str__(self):
-        return f"{self.title} S{self.season_number:02d}E{self.episode_number:02d} {self.amount_plays}"
+        return f"{self.title} S{self.season_number:02d}E{self.episode_number:02d}"
 
 
 def get_series(movies_and_series, content_type):
