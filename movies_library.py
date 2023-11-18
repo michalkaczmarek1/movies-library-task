@@ -13,7 +13,7 @@ class Movie():
         return self.amount_plays + 1
 
     def __str__(self):
-        return f"{self.title} ({self.year})"
+        return f"{self.title} ({self.year}) {self.amount_plays}"
 
 
 class Serie(Movie):
@@ -23,7 +23,7 @@ class Serie(Movie):
         self.season_number = season_number
 
     def __str__(self):
-        return f"{self.title} S{self.season_number:02d}E{self.episode_number:02d}"
+        return f"{self.title} S{self.season_number:02d}E{self.episode_number:02d} {self.amount_plays}"
 
 
 def get_series(movies_and_series, content_type):
@@ -37,9 +37,7 @@ def get_movies(movies_and_series, content_type):
 def separation_content_type(movies_and_series, content_type):
     elems = []
     for elem in movies_and_series:
-        if content_type == Movie and hasattr(elem, "episode_number") == False:
-            elems.append(elem)
-        elif content_type == Serie:
+        if type(elem) == content_type:
             elems.append(elem)
     return sorted(elems, key=lambda elem: elem.title)
 
@@ -77,13 +75,13 @@ def top_titles(movies_and_series, amount_chose_movies_and_series, content_type):
         return
 
     if content_type == 1:
-        choose_movies = get_movies(movies_and_series, Movie)[
+        choose_content = get_movies(movies_and_series, Movie)[
             :amount_chose_movies_and_series]
-        top_popular_content = sort_by_amount_plays_desc(choose_movies)
     elif content_type == 2:
-        choose_series = get_series(movies_and_series, Serie)[
+        choose_content = get_series(movies_and_series, Serie)[
             :amount_chose_movies_and_series]
-        top_popular_content = sort_by_amount_plays_desc(choose_series)
+
+    top_popular_content = sort_by_amount_plays_desc(choose_content)
 
     return top_popular_content
 
