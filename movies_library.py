@@ -2,7 +2,7 @@ import random
 from datetime import date
 
 
-class Movie():
+class Movie:
     def __init__(self, title, year, type, amount_plays):
         self.title = title
         self.year = year
